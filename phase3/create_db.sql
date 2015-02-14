@@ -16,17 +16,20 @@ create table community (
 	
 	member_id int NOT NULL,
 	FOREIGN KEY (member_id) references user(id),
-	
+	  
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 create table project (
 	id int AUTO_INCREMENT PRIMARY KEY,
 	name varchar(100) UNIQUE NOT NULL,
-	user_id int NOT NULL,
+	funder_id int NOT NULL,
+	initiator_id int NOT NULL,
 	created_at datetime NOT NULL,
 	description varchar(500) UNIQUE NOT NULL,
 	
-	FOREIGN KEY (user_id) references user(id),
+	
+	FOREIGN KEY (funder_id) references user(id),
+	FOREIGN KEY (initiator_id) references user(id),
 	funding int NOT NULL
 	
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
