@@ -1,4 +1,7 @@
 -- Tested with MySQL v5.1.73
+
+CREATE database csc309;
+
 create table user (
 	id int AUTO_INCREMENT PRIMARY KEY,
 	username varchar(40) UNIQUE NOT NULL,
@@ -18,18 +21,19 @@ create table community (
 	id int AUTO_INCREMENT PRIMARY KEY,
 	name varchar(100) UNIQUE NOT NULL,
 	category varchar(100) UNIQUE NOT NULL,
-	FOREIGN KEY (member_id) references user(id),
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+	member_id int NOT NULL,
+	FOREIGN KEY (member_id) references user(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 create table project (
 	id int AUTO_INCREMENT PRIMARY KEY,
-	name varchar(100) UNIQUE NOT NULL,
-	category varchar(100) UNIQUE NOT NULL,
+	name varchar(30) UNIQUE NOT NULL,
+	category varchar(30) UNIQUE NOT NULL,
 	funder_id int NOT NULL,
 	initiator_id int NOT NULL,
 	created_at datetime NOT NULL,
-	description varchar(500) UNIQUE NOT NULL,
+	description varchar(200) UNIQUE NOT NULL,
 	FOREIGN KEY (funder_id) references user(id),
 	FOREIGN KEY (initiator_id) references user(id),
 	funding int DEFAULT 0
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
