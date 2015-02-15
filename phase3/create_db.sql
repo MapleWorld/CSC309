@@ -11,9 +11,9 @@ create table user (
 	created_at datetime NOT NULL,
 	email varchar(40) UNIQUE NOT NULL,
 	reputation int DEFAULT 0,
-	mailing_address varchar(100) NOT NULL,
-	phone varchar(20) NOT NULL,
-	gender varchar(10) UNIQUE NOT NULL,
+	mailing_address varchar(100),
+	phone varchar(20),
+	gender varchar(10),
 	admin tinyint default 0 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
