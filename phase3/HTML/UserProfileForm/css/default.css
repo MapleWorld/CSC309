@@ -73,6 +73,9 @@ form.register fieldset.row1 label{
     margin-right: 6px;
     margin-top:2px;
 }
+
+
+
 form.register fieldset.row2
 {
     border-top:1px solid #F1F1F1;
@@ -91,12 +94,11 @@ form.register fieldset.row3
 }
 form.register fieldset.row4
 {
-    border-top:1px solid #F1F1F1;
-    border-right:1px solid #F1F1F1;
+    width:770px;
     padding:5px;
     float:left;
-    clear:both;
-    width:500px;
+    border-top:1px solid #F5F5F5;
+    margin-bottom:15px;
 }
 form.register .infobox{
     float:right;
@@ -164,6 +166,14 @@ form.register label.gender{
     text-align:left;
     line-height:19px;
 }
+form.register label.category{
+    margin-top:-1px;
+    margin-bottom:2px;
+    width:34px;
+    float:left;
+    text-align:left;
+    line-height:19px;
+}
 form.register input[type=text]
 {
     border: 1px solid #E1E1E1;
@@ -186,7 +196,7 @@ form.register input[type=password]
     -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
     text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
     cursor: pointer;
-    float:left;
+    float:right;
     font-size:18px;
     margin:10px;
 }
@@ -228,6 +238,11 @@ p.agreement label{
     text-align:left;
     margin-top:3px;
 }
-
-
+textarea{
+	width: 100%;
+    box-sizing: border-box;
+    height: 100%;
+	margin-left: auto;
+    margin-right: auto;
+}
 
