@@ -5,8 +5,8 @@ CREATE database csc309;
 create table user (
 	id int AUTO_INCREMENT PRIMARY KEY,
 	username varchar(40) UNIQUE NOT NULL,
-	firstname varchar(40) UNIQUE NOT NULL,
-	lastname varchar(40) UNIQUE NOT NULL,
+	firstname varchar(40) NOT NULL,
+	lastname varchar(40) NOT NULL,
 	password varchar(100) NOT NULL,
 	created_at datetime NOT NULL,
 	email varchar(40) UNIQUE NOT NULL,
