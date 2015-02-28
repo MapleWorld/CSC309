@@ -1,7 +1,20 @@
-# CSC309
+## Installation
+Clone or download this folder 
+Navigate to this folder then type
 
-Create the database by running the query inside create_db.sql
+	npm install
 
-Then, add the sample data by running test_data.sql
+Then in your browser, type in 
 
-Test node.js file by running "node nodejs_filename.js"
+	localhost:3000
+	
+## Configuration (database)
+server.js Change user and password to your database user name and password
+
+        host: 'localhost',
+        user: 'root',
+        password : 'root',
+        port : 3306, //port mysql
+        database:'csc309'	
+	
+Create the database table csc309 by importing create_db.sql, then import the test case through test_data.sql
