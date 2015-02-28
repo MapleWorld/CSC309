@@ -27,7 +27,7 @@ app.use(
 );
 
 app.get('/',function(req,res){
-	res.sendFile(__dirname + '/views/register.html');
+	res.sendFile(__dirname + '/views/login_and_registration.html');
 });
 
 // Routes
