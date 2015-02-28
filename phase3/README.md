@@ -4,6 +4,10 @@ Navigate to this folder then type
 
 	npm install
 
+Then run the server.js file 
+
+	node server.js
+	
 Then in your browser, type in 
 
 	localhost:3000
