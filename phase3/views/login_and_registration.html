@@ -9,10 +9,11 @@
         <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  -->
         <title>Login and Registration Form</title>
         <link rel="shortcut icon" href="../favicon.ico"> 
-        <link rel="stylesheet" type="text/css" href="/../css/LoginAndReg/css/demo.css" />
-        <link rel="stylesheet" type="text/css" href="/../css/LoginAndReg/css/style.css" />
-	<link rel="stylesheet" type="text/css" href="/../css/LoginAndReg/css/animate-custom.css" />
-	<script type="text/javascript" src="/../js/jquery-1.10.2.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../public/css/LoginAndReg/css/demo.css" />
+        <link rel="stylesheet" type="text/css" href="../public/css/LoginAndReg/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="../public/css/LoginAndReg/css/animate-custom.css" />
+	<script type="text/javascript" src="../public/js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="../public/js/LoginAndReg/JavaScript.js"></script>
     </head>
     <body>
         <div class="container">
@@ -97,34 +98,5 @@
                 </div>  
             </section>
         </div>
-        
-<script>
-
-    function saveUser(){
-       
-       $.ajax({
-        
-			url:"/register",
-			type:"post",
-			data:$("#the-form").serialize(),
-			success:function(res){
-				window.location.reload();
-				return false;
-			},
-			
-			error:function(xhr, status, error){
-				console.log(xhr.responseText);
-				var err = '';
-				$.each(JSON.parse(xhr.responseText) , function(i, item) {
-					 err +='<li>'+item.msg+'</li>';
-				});
-				$(".err-area").html(err);    
-				return false;
-			}
-        
-       });
-    }
-
-</script>
     </body>
 </html>
