@@ -5,8 +5,9 @@ var express  = require('express'),
     expressValidator = require('express-validator');
 
 /*Set EJS template Engine*/
+app.engine('html', require('ejs').__express);
 app.set('views','./views');
-app.set('view engine','ejs');
+app.set('view engine','html');
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,14 +27,13 @@ app.use(
     },'request')
 );
 
-app.get('/',function(req,res){
-	res.sendFile(__dirname + '/views/login_and_registration.html');
-});
-
 // Routes
 var router = express.Router();
+var home = require('./routes/home');
 var register = require('./routes/register');
 var login = require('./routes/login');
+
+app.use('/', home);
 app.use('/login', login);
 app.use('/register', register);
 
