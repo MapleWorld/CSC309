@@ -33,6 +33,8 @@ app.get('/',function(req,res){
 // Routes
 var router = express.Router();
 var register = require('./routes/register');
+var login = require('./routes/login');
+app.use('/login', login);
 app.use('/register', register);
 
 //start Server

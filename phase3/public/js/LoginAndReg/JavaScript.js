@@ -1,3 +1,28 @@
+function loginUser(){
+       
+   $.ajax({     
+			url:"/login",
+			type:"post",
+			data:$("#login-form").serialize(),
+			success:function(res){
+				window.location.reload();
+				return false;
+			},
+			
+			error:function(xhr, status, error){
+				console.log(xhr.responseText);
+				var err = '';
+				$.each(JSON.parse(xhr.responseText) , function(i, item) {
+					 err +='<li>'+item.msg+'</li>';
+				});
+				$(".err-area").html(err);    
+				return false;
+			}
+        
+       });
+}
+
+
 function saveUser(){
        
    $.ajax({     
