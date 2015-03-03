@@ -32,12 +32,25 @@ var router = express.Router();
 var home = require('./routes/home');
 var register = require('./routes/register');
 var login = require('./routes/login');
+var about = require('./routes/about');
+var user = require('./routes/user');
+var contact = require('./routes/contact');
+var community = require('./routes/community');
 
 app.use('/', home);
 app.use('/login', login);
+app.use('/user', user);
+app.use('/about', about);
+app.use('/contact', contact);
 app.use('/register', register);
+app.use('/community', community);
 
 //start Server
 var server = app.listen(3000,function(){
    console.log("Listening to port %s",server.address().port);
 });
+
+
+
+
+

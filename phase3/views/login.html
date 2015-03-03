@@ -1,0 +1,45 @@
+<!--Bootstrapped header -->
+<!-- Header -->
+<% include header.html %>
+
+<!--Bootstrapped nav bar-->
+<!-- Navigation -->
+<% include navbar.html %>
+	
+<div id="login_form">
+
+	<div class="page-data">
+		<ul class="err-area"></ul>
+	</div>
+	
+	<form  method="post" id="login-form" autocomplete="on"> 
+		<h1>Log in</h1> 
+		<p> 
+			<label class="user_name">Your user name</label>
+			<input id="user_name_signup" required="required" type="text" placeholder="mysuperusername690" />
+		</p>
+		<p> 
+			<label class="password">Your password </label>
+			<input id="password" required="required" type="password" placeholder="eg. X8df!90EO"/>
+		</p>
+		
+		<p class="keeplogin"> 
+			<input type="checkbox" id="loginkeeping" value="loginkeeping" /> 
+			<label>Keep me logged in</label>
+		</p>
+		
+		<p class="login button"> 
+			<!--<input type="submit" value="Login" /> -->
+			<input type="button" value="Login" onClick="loginUser()"/> 
+		</p>
+		<p class="change_link">
+			Not a member yet ?
+			<a href="/register">Join us</a>
+		</p>
+	</form>
+</div>
+
+<!-- Bootstrapped Footer -->
+<!-- Footer -->
+<% include footer.html %>
+

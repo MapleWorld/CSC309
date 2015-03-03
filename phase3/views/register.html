@@ -1,0 +1,48 @@
+<!--Bootstrapped header -->
+<!-- Header -->
+<% include header.html %>
+
+<!--Bootstrapped nav bar-->
+<!-- Navigation -->
+<% include navbar.html %>
+	
+<div id="register_form">
+
+	<div class="page-data">
+		<ul class="err-area"></ul>
+	</div>
+	
+	<form  method="post" autocomplete="on"> 
+		<h1> Sign up </h1> 
+		<p> 
+			<label class="user_name">Your user name</label>
+			<input id="user_name_signup" required="required" type="text" placeholder="mysuperusername690" />
+		</p>
+		<p> 
+			<label class="first_name">Your first name</label>
+			<input id="first_name" required="required" type="text" placeholder="first_name" />
+		</p>
+		
+		<p> 
+			<label class="last_name">Your last name</label>
+			<input id="last_name" required="required" type="text" placeholder="last_name" />
+		</p>
+		
+		<p> 
+			<label class="email"  > Your email</label>
+			<input id="email" required="required" type="email" placeholder="mysupermail@mail.com"/> 
+		</p>
+		<p> 
+			<label class="password">Your password </label>
+			<input id="password" required="required" type="password" placeholder="eg. X8df!90EO"/>
+		</p>
+		<p class="register button"> 
+			<input type="button" value="Register" onClick="registerUser()"/> 
+		</p>
+	</form>
+</div>
+
+<!-- Bootstrapped Footer -->
+<!-- Footer -->
+<% include footer.html %>
+
