@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function (req, res) {
-	res.render('login');
+router.get('/login', function (req, res) {
+	res.render('login', {notif: req.flash('notif')});
 });
 
 //post data to DB | POST
-router.post('/', function (req, res) {
-
+router.post('/login', function (req, res) {
+	
 	// Validation
 	req.assert('user_name', 'User Name is required').notEmpty();
 	req.assert('password','Enter a password 6 - 20').len(6,20);
@@ -36,7 +36,8 @@ router.post('/', function (req, res) {
 			return next("Cannot Connect");
 		}
 		
-		var sql    = 'SELECT password FROM user WHERE username  =' + conn.escape(data.username) + ' and password=' + conn.escape(data.password) ;
+		var sql    = 'SELECT password FROM user WHERE username  =' + 
+								conn.escape(data.username) + ' and password=' + conn.escape(data.password) ;
 		conn.query(sql, function(err, rows) {
 
 			if (err) {
@@ -44,18 +45,16 @@ router.post('/', function (req, res) {
 			}
 			
 			if (rows.length == 0){
-				console.log(errors);
-				console.log(login_error);
 				res.status(422).json([login_error]);
 				return ;
 			}
 			
-			res.sendStatus(200);
-
+			req.flash('notif', 'You have successfully logged in.');
+			res.send({redirect: '/'});
 		});
 
 	});
-
+	
 });
 
 module.exports = router;

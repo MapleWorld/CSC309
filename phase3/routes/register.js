@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function (req, res) {
-	res.render('register');
+router.get('/register', function (req, res) {
+	res.render('register', {notif: req.flash('notif')});
 });
 
 //post data to DB | POST
-router.post('/', function (req, res) {
+router.post('/register', function (req, res) {
 
 	// Validation
 	req.assert('user_name', 'User Name is required').notEmpty();
@@ -16,6 +16,7 @@ router.post('/', function (req, res) {
 	req.assert('password','Enter a password 6 - 20').len(6,20);
 
 	var errors = req.validationErrors();
+
 	if (errors) {
 		res.status(422).json(errors);
 		return;
@@ -40,11 +41,17 @@ router.post('/', function (req, res) {
 		var query = conn.query("INSERT INTO user SET ? ", data, function (err, rows) {
 
 			if (err) {
-				console.log(err);
+			
+				var register_error = {
+					msg: err.code
+				};
+	
+				res.status(422).json([register_error]);
+				return ;
 			}
-
-			res.sendStatus(200);
-
+			
+			req.flash('notif', 'You have successfully created an account');
+			res.send({redirect: '/'});
 		});
 
 	});

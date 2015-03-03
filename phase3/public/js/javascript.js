@@ -5,7 +5,7 @@ function loginUser(){
 			type:"post",
 			data:$("#login-form").serialize(),
 			success:function(res){
-				window.location.reload();
+				window.location = res.redirect;
 				return false;
 			},
 			
@@ -22,15 +22,14 @@ function loginUser(){
        });
 }
 
-
 function registerUser(){
        
    $.ajax({     
 			url:"/register",
 			type:"post",
-			data:$("#the-form").serialize(),
+			data:$("#register-form").serialize(),
 			success:function(res){
-				window.location.reload();
+				window.location = res.redirect;
 				return false;
 			},
 			

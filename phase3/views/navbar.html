@@ -23,9 +23,16 @@
 				<li>
 					<a href="/contact">Contact</a>
 				</li>
+
 			</ul>
+			
+			<% if(notif) {%>
+				<p style="color: white; position: fixed;left:50%;top:15px;"><%= notif %></p>
+			<% }; %>
+
 		</div>
-		<!-- /.navbar-collapse -->
+		<!-- /.navbar-collapse -->							
+
 	</div>
 	<!-- /.container -->
 </nav>
