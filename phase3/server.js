@@ -28,6 +28,7 @@ app.use(session({
 app.use(flash());
 
 /*MySql connection*/
+/*
 var connection  = require('express-myconnection'),
     mysql = require('mysql');
 
@@ -39,7 +40,7 @@ app.use(
 		password 	: 'root'
     },'request')
 );
-
+*/
 // Routes
 var router 		= express.Router();
 var home 			= require('./routes/home');
