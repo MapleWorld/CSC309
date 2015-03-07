@@ -1,11 +1,11 @@
-var express  				= require('express');
-var path      				= require('path');
+var express  			= require('express');
+var path      			= require('path');
 var bodyParser 			= require('body-parser');
-var app 					= express();
+var app 				= express();
 var expressValidator 	= require('express-validator');
-var flash 					= require('connect-flash');
+var flash 				= require('connect-flash');
 var cookieParser 		= require('cookie-parser');
-var session 				= require('express-session');
+var session 			= require('express-session');
 
 /*Set EJS template Engine*/
 app.engine('html', require('ejs').__express);
@@ -19,35 +19,36 @@ app.use(expressValidator());
 
 app.use(cookieParser('secretString'));
 app.use(session({
-					secret: 'Lonely Boy',
-					resave: true,
-					saveUninitialized: true,
-					cookie: { maxAge: 60000 }
-				}	
-			));
+	secret: 'Lonely Boy',
+	resave: true,
+	saveUninitialized: true,
+	cookie: { maxAge: 60000 }
+	}	
+));
 app.use(flash());
 
 /*MySql connection*/
+/* Comment this part if don't have database install'*/
 var connection  = require('express-myconnection'),
     mysql = require('mysql');
 
 app.use(
     connection(mysql,{
-		host     		: 'localhost',
+		host     	: 'localhost',
 		database	: 'csc309',
-		user     		: 'root',
+		user     	: 'root',
 		password 	: 'root'
     },'request')
 );
 
 // Routes
 var router 		= express.Router();
-var home 			= require('./routes/home');
-var register 		= require('./routes/register');
-var login 			= require('./routes/login');
-var about 			= require('./routes/about');
-var user 			= require('./routes/user');
-var contact 		= require('./routes/contact');
+var home 		= require('./routes/home');
+var register 	= require('./routes/register');
+var login 		= require('./routes/login');
+var about 		= require('./routes/about');
+var user 		= require('./routes/user');
+var contact 	= require('./routes/contact');
 var community 	= require('./routes/community');
 
 app.use('/', home);
