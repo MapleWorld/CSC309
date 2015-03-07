@@ -28,7 +28,10 @@ app.use(session({
 app.use(flash());
 
 /*MySql connection*/
+
 /* Comment this part if don't have database install'*/
+
+/*
 var connection  = require('express-myconnection'),
     mysql = require('mysql');
 
@@ -40,6 +43,7 @@ app.use(
 		password 	: 'root'
     },'request')
 );
+*/
 
 // Routes
 var router 		= express.Router();
