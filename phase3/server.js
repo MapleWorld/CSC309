@@ -6,6 +6,8 @@ var expressValidator 	= require('express-validator');
 var flash 				= require('connect-flash');
 var cookieParser 		= require('cookie-parser');
 var session 			= require('express-session');
+var connection  		= require('express-myconnection');
+var mysql 				= require('mysql');
 
 /*Set EJS template Engine*/
 app.engine('html', require('ejs').__express);
@@ -19,6 +21,9 @@ app.use(expressValidator());
 
 app.use(cookieParser('secretString'));
 app.use(session({
+	cookieName: "session",
+	duration: 30 * 60 * 1000,
+	activeDuration: 5 * 60 * 1000,
 	secret: 'Lonely Boy',
 	resave: true,
 	saveUninitialized: true,
@@ -28,22 +33,15 @@ app.use(session({
 app.use(flash());
 
 /*MySql connection*/
-
 /* Comment this part if don't have database install'*/
-
-/*
-var connection  = require('express-myconnection'),
-    mysql = require('mysql');
-
-app.use(
-    connection(mysql,{
+app.use(connection(mysql,{
 		host     	: 'localhost',
 		database	: 'csc309',
 		user     	: 'root',
 		password 	: 'root'
     },'request')
 );
-*/
+
 
 // Routes
 var router 		= express.Router();

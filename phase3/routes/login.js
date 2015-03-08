@@ -2,12 +2,17 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/login', function (req, res) {
+    if(req.session.authenticated) {
+        req.flash('notif', 'You are already logged in.');
+    	res.redirect('/');
+    	return ;
+    }
+    
 	res.render('login', {notif: req.flash('notif')});
 });
 
 //post data to DB | POST
 router.post('/login', function (req, res) {
-	
 	// Validation
 	req.assert('user_name', 'User Name is required').notEmpty();
 	req.assert('password','Enter a password 6 - 20').len(6,20);
@@ -31,15 +36,14 @@ router.post('/login', function (req, res) {
 
 	// Check with data in MySQL
 	req.getConnection(function (err, conn) {
-
 		if (err){
 			return next("Cannot Connect");
 		}
 		
-		var sql    = 'SELECT password FROM user WHERE username  =' + 
-								conn.escape(data.username) + ' and password=' + conn.escape(data.password) ;
+		var sql = 'SELECT * FROM user WHERE username  =' + 
+					conn.escape(data.username) + ' and password=' + conn.escape(data.password);
+					
 		conn.query(sql, function(err, rows) {
-
 			if (err) {
 				console.log(err);
 			}
@@ -49,7 +53,11 @@ router.post('/login', function (req, res) {
 				return ;
 			}
 			
+			console.log(rows);
+			
 			req.flash('notif', 'You have successfully logged in.');
+			req.session.user = data.username;
+            req.session.authenticated = true;
 			res.send({redirect: '/'});
 		});
 

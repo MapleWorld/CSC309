@@ -2,6 +2,12 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/register', function (req, res) {
+	if(req.session.authenticated) {
+        req.flash('notif', 'You are already logged in.');
+    	res.redirect('/');
+    	return ;
+    }
+    
 	res.render('register', {notif: req.flash('notif')});
 });
 
