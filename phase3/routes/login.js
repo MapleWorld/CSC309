@@ -37,6 +37,7 @@ router.post('/login', function (req, res) {
 	// Check with data in MySQL
 	req.getConnection(function (err, conn) {
 		if (err){
+			console.log(err);
 			return next("Cannot Connect");
 		}
 		

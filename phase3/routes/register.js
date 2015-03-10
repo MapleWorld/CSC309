@@ -41,8 +41,10 @@ router.post('/register', function (req, res) {
 	// Inserting into MySQL
 	req.getConnection(function (err, conn) {
 
-		if (err)
+		if (err){
+			console.log(err);
 			return next("Cannot Connect");
+		}
 
 		var query = conn.query("INSERT INTO user SET ? ", data, function (err, rows) {
 

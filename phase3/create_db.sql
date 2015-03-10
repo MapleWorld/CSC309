@@ -1,6 +1,6 @@
 -- Tested with MySQL v5.1.73
 
-CREATE database csc309;
+CREATE database communityFund;
 
 create table user (
 	id int AUTO_INCREMENT PRIMARY KEY,

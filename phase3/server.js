@@ -36,7 +36,7 @@ app.use(flash());
 /* Comment this part if don't have database install'*/
 app.use(connection(mysql,{
 		host     	: 'localhost',
-		database	: 'csc309',
+		database	: 'communityFund',
 		user     	: 'root',
 		password 	: 'root'
     },'request')
@@ -62,7 +62,7 @@ app.use('/', register);
 app.use('/', community);
 
 //start Server
-var server = app.listen(3000,function(){
+var server = app.listen(8080,function(){
    console.log("Listening to port %s",server.address().port);
 });
 
