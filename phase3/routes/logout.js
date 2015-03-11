@@ -1,10 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
+// Delete user session
 router.get('/logout', function (req, res) {
 
     if(req.session.authenticated) {
-    	//req.session.destroy();
+    	delete req.session.user;
+    	delete req.session.authenticated;
         req.flash('notif', 'You are logged out.');
     	res.redirect('/');
     	return ;

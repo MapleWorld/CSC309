@@ -7,11 +7,10 @@ router.get('/login', function (req, res) {
     	res.redirect('/');
     	return ;
     }
-    
 	res.render('login', {notif: req.flash('notif')});
 });
 
-//post data to DB | POST
+// Post login data to database
 router.post('/login', function (req, res) {
 	// Validation
 	req.assert('user_name', 'User Name is required').notEmpty();
