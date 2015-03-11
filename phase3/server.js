@@ -42,21 +42,20 @@ app.use(connection(mysql,{
     },'request')
 );
 
-
 // Routes
 var router 		= express.Router();
 var home 		= require('./routes/home');
 var register 	= require('./routes/register');
 var login 		= require('./routes/login');
 var about 		= require('./routes/about');
-var user 		= require('./routes/user');
+var profile 	= require('./routes/profile');
 var contact 	= require('./routes/contact');
 var community 	= require('./routes/community');
 
 app.use('/', home);
 app.use('/', login);
-app.use('/', user);
 app.use('/', about);
+app.use('/', profile);
 app.use('/', contact);
 app.use('/', register);
 app.use('/', community);
