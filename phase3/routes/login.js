@@ -51,12 +51,12 @@ router.post('/login', function (req, res) {
 			if (rows.length == 0){
 				res.status(422).json([login_error]);
 				return ;
-			}
+			} 
 			
-			console.log(rows);
+			console.log(rows[0]);
 			
 			req.flash('notif', 'You have successfully logged in.');
-			req.session.user = data.username;
+			req.session.data = rows[0];
             req.session.authenticated = true;
 			res.send({redirect: '/'});
 		});

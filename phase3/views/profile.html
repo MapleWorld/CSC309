@@ -9,6 +9,37 @@
 
 <p>User Profile Page</p>
 
+<table border="1" cellpadding="7" cellspacing="7">
+	<tr>
+		<th width="50px">ID</th>
+		<th>User Name</th>
+		<th>Password</th>
+		<th>First Name</th>
+		<th>Last Name</th>
+		<th>Email</th>
+		<th>Reputation</th>
+		<th>Mailing address</th>
+		<th>Phone</th>
+		<th>Gender</th>
+	</tr>
+	
+	<% for(var i = 0;i < data.length;i++) { %>
+		 
+	<tr>
+		<td><%=data[0].id%></td>
+		<td><%=data[0].password%></td>
+		<td><%=data[0].username%></td>
+		<td><%=data[0].firstname%></td>
+		<td><%=data[0].lastname%></td>
+		<td><%=data[0].email%></td>
+		<td><%=data[0].reputation%></td>
+		<td><%=data[0].mailling_address%></td>
+		<td><%=data[0].phone%></td>
+		<td><%=data[0].gender%></td>
+	</tr>
+	<% } %>
+</table>
+
 
 <!-- Bootstrapped Footer -->
 <!-- Footer -->
