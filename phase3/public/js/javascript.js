@@ -1,4 +1,4 @@
-function loginUser(){
+function loginUserForm(){
        
    $.ajax({     
 			url:"/login",
@@ -15,7 +15,31 @@ function loginUser(){
 				$.each(JSON.parse(xhr.responseText) , function(i, item) {
 					 err +='<li>'+item.msg+'</li>';
 				});
-				$(".login-err-area").html(err);    
+				$(".login-form-err-area").html(err);    
+				return false;
+			}
+        
+       });
+}
+
+function loginUserPage(){
+       
+   $.ajax({     
+			url:"/login",
+			type:"post",
+			data:$("#login-page").serialize(),
+			success:function(res){
+				window.location = res.redirect;
+				return false;
+			},
+			
+			error:function(xhr, status, error){
+				console.log(xhr.responseText);
+				var err = '';
+				$.each(JSON.parse(xhr.responseText) , function(i, item) {
+					 err +='<li>'+item.msg+'</li>';
+				});
+				$(".login-page-err-area").html(err);    
 				return false;
 			}
         

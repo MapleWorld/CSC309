@@ -35,10 +35,11 @@ app.use(flash());
 /*MySql connection*/
 /* Comment this part if don't have database install'*/
 app.use(connection(mysql,{
-		host     	: 'localhost',
-		database	: 'communityFund',
-		user     	: 'root',
-		password 	: 'root'
+	host     : 'localhost',
+	//host     : 'communityfund.cazlh4nyhwx5.us-east-1.rds.amazonaws.com',
+	database : 'communityFund',
+	user     : 'root',
+	password : 'root'
     },'request')
 );
 
