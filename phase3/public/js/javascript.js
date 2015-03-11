@@ -15,7 +15,7 @@ function loginUser(){
 				$.each(JSON.parse(xhr.responseText) , function(i, item) {
 					 err +='<li>'+item.msg+'</li>';
 				});
-				$(".err-area").html(err);    
+				$(".login-err-area").html(err);    
 				return false;
 			}
         
@@ -39,7 +39,7 @@ function registerUser(){
 				$.each(JSON.parse(xhr.responseText) , function(i, item) {
 					 err +='<li>'+item.msg+'</li>';
 				});
-				$(".err-area").html(err);    
+				$(".register-err-area").html(err);    
 				return false;
 			}
         

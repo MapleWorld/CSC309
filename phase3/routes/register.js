@@ -8,7 +8,8 @@ router.get('/register', function (req, res) {
     	return ;
     }
     
-	res.render('register', {notif: req.flash('notif')});
+	res.render('register', {notif: req.flash('notif'),
+					 auth: req.session.authenticated});	
 });
 
 //post data to DB | POST
