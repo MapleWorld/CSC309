@@ -8,9 +8,7 @@
 	
 <div id="register_form">
 
-	<div class="page-data">
-		<ul class="register-err-area"></ul>
-	</div>
+	<div class="register-form-err-area"></div>
 	
 	<form  id="register-form" method="post" autocomplete="on"> 
 		<h1> Sign up </h1> 
@@ -37,7 +35,7 @@
 			<input id="password" name="password" required="required" type="password" placeholder="eg. X8df!90EO"/>
 		</p>
 		<p class="register button"> 
-			<input type="button" value="Register" onClick="registerUser()"/> 
+			<input type="button" value="Register" onClick="registerUser('#register-form', '.register-form-err-area')"/> 
 		</p>
 	</form>
 </div>
