@@ -8,7 +8,7 @@ router.get('/funder', function(req, res) {
 		return ;	
 	}
 	req.flash('notif', 'You are not login.');
-	res.render('funder', {notif: req.flash('notif'),
+	res.render('login', {notif: req.flash('notif'),
 					 auth: req.session.authenticated});		
 });
 

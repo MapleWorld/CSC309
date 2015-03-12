@@ -1,13 +1,14 @@
-var express  			= require('express');
 var path      			= require('path');
-var bodyParser 			= require('body-parser');
-var app 				= express();
-var expressValidator 	= require('express-validator');
-var flash 				= require('connect-flash');
-var cookieParser 		= require('cookie-parser');
-var session 			= require('express-session');
-var connection  		= require('express-myconnection');
 var mysql 				= require('mysql');
+var express  			= require('express');
+var bodyParser 			= require('body-parser');
+var cookieParser 		= require('cookie-parser');
+var flash 				= require('connect-flash');
+var session 			= require('express-session');
+var expressValidator 	= require('express-validator');
+var connection  		= require('express-myconnection');
+
+var app 				= express();
 
 /*Set EJS template Engine*/
 app.engine('html', require('ejs').__express);
@@ -44,17 +45,20 @@ app.use(connection(mysql,{
 );
 
 // Routes
-var router 		= express.Router();
-var home 		= require('./routes/home');
-var login 		= require('./routes/login');
-var about 		= require('./routes/about');
-var logout		= require('./routes/logout');
-var funder		= require('./routes/funder');
-var profile 	= require('./routes/profile');
-var contact 	= require('./routes/contact');
-var register 	= require('./routes/register');
-var initiator	= require('./routes/initiator');
-var community 	= require('./routes/community');
+var router 			= express.Router();
+var home 			= require('./routes/home');
+var login 			= require('./routes/login');
+var about 			= require('./routes/about');
+var logout			= require('./routes/logout');
+var funder			= require('./routes/funder');
+var profile 		= require('./routes/profile');
+var contact 		= require('./routes/contact');
+var project			= require('./routes/project');
+var projects		= require('./routes/projects');
+var register 		= require('./routes/register');
+var initiator		= require('./routes/initiator');
+var community 		= require('./routes/community');
+var create_project	= require('./routes/create_project');
 
 app.use('/', home);
 app.use('/', login);
@@ -63,9 +67,12 @@ app.use('/', logout);
 app.use('/', funder);
 app.use('/', profile);
 app.use('/', contact);
+app.use('/', project);
+app.use('/', projects);
 app.use('/', register);
 app.use('/', initiator);
 app.use('/', community);
+app.use('/', create_project);
 
 //start Server
 var server = app.listen(8080,function(){

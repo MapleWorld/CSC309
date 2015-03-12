@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/initiator', function(req, res) {
+router.get('/create_project', function(req, res) {
 	if(req.session.authenticated) {
-		res.render('initiator', {notif: req.flash('notif'),
+		res.render('create_project', {notif: req.flash('notif'),
 						auth: req.session.authenticated});	
 		return ;		
 	}

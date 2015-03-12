@@ -20,7 +20,7 @@ create table user (
 	mailing_address varchar(100),
 
 	-- Funder Data
-	money int 0,
+	money int DEFAULT 0,
 	company varchar(30),
 	companyType varchar(30),
 	
