@@ -1,3 +1,6 @@
+## NOTE:
+Source Code might not align due to the setting of the tab in github and the type of editior that we use.
+
 To see a live version, visit http://ec2-52-1-96-34.compute-1.amazonaws.com:8080/
 
 To run locally, follow the steps below:
