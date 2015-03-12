@@ -46,21 +46,25 @@ app.use(connection(mysql,{
 // Routes
 var router 		= express.Router();
 var home 		= require('./routes/home');
-var register 	= require('./routes/register');
 var login 		= require('./routes/login');
 var about 		= require('./routes/about');
 var logout		= require('./routes/logout');
+var funder		= require('./routes/funder');
 var profile 	= require('./routes/profile');
 var contact 	= require('./routes/contact');
+var register 	= require('./routes/register');
+var initiator	= require('./routes/initiator');
 var community 	= require('./routes/community');
 
 app.use('/', home);
 app.use('/', login);
 app.use('/', about);
 app.use('/', logout);
+app.use('/', funder);
 app.use('/', profile);
 app.use('/', contact);
 app.use('/', register);
+app.use('/', initiator);
 app.use('/', community);
 
 //start Server

@@ -15,7 +15,7 @@ router.get('/profile', function(req, res) {
 });
 
 // Get all user data
-router.get('/profile/api', function(req, res, next) {
+router.get('/profile/users', function(req, res, next) {
 
     req.getConnection(function(err,conn){
 

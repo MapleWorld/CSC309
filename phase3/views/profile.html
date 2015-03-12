@@ -26,20 +26,22 @@
 	<% for(var i = 0;i < data.length;i++) { %>
 		 
 	<tr>
-		<td><%=data[0].id%></td>
-		<td><%=data[0].password%></td>
-		<td><%=data[0].username%></td>
-		<td><%=data[0].firstname%></td>
-		<td><%=data[0].lastname%></td>
-		<td><%=data[0].email%></td>
-		<td><%=data[0].reputation%></td>
-		<td><%=data[0].mailling_address%></td>
-		<td><%=data[0].phone%></td>
-		<td><%=data[0].gender%></td>
+		<td><%=data[i].id%></td>
+		<td><%=data[i].password%></td>
+		<td><%=data[i].username%></td>
+		<td><%=data[i].firstname%></td>
+		<td><%=data[i].lastname%></td>
+		<td><%=data[i].email%></td>
+		<td><%=data[i].reputation%></td>
+		<td><%=data[i].mailling_address%></td>
+		<td><%=data[i].phone%></td>
+		<td><%=data[i].gender%></td>
 	</tr>
 	<% } %>
 </table>
 
+<a href="/funder" >Funder Form</a>
+<a href="/initiator" >Initiator Form</a>
 
 <!-- Bootstrapped Footer -->
 <!-- Footer -->
