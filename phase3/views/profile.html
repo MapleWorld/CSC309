@@ -6,42 +6,59 @@
 <!-- Navigation -->
 <% include navbar.html %>
 
-
-<p>User Profile Page</p>
-
-<table border="1" cellpadding="7" cellspacing="7">
-	<tr>
-		<th width="50px">ID</th>
-		<th>User Name</th>
-		<th>Password</th>
-		<th>First Name</th>
-		<th>Last Name</th>
-		<th>Email</th>
-		<th>Reputation</th>
-		<th>Mailing address</th>
-		<th>Phone</th>
-		<th>Gender</th>
-	</tr>
+<div class="row">
+	<div class="col-md-3">
+		<p class="lead">FUNCTION</p>
+		<div class="list-group">
+			<a href="/funder" class="list-group-item">Funder Form</a>
+			<a href="/initiator" class="list-group-item">Initiator Form</a>
+			<a href="" class="list-group-item">Change Password</a>
+			<a href="" class="list-group-item">Create A Project</a>
+			<a href="" class="list-group-item">Manage Account Info</a>
+		</div>
+	</div>
 	
-	<% for(var i = 0;i < data.length;i++) { %>
-		 
-	<tr>
-		<td><%=data[i].id%></td>
-		<td><%=data[i].password%></td>
-		<td><%=data[i].username%></td>
-		<td><%=data[i].firstname%></td>
-		<td><%=data[i].lastname%></td>
-		<td><%=data[i].email%></td>
-		<td><%=data[i].reputation%></td>
-		<td><%=data[i].mailling_address%></td>
-		<td><%=data[i].phone%></td>
-		<td><%=data[i].gender%></td>
-	</tr>
-	<% } %>
-</table>
-
-<a href="/funder" >Funder Form</a>
-<a href="/initiator" >Initiator Form</a>
+	<div class="col-md-9">
+		<table border="1" cellpadding="7" cellspacing="7">
+			<caption>User Profile Page</caption>
+			
+			<tr>
+				<th width="50px">ID</th>
+				<th>User Name</th>
+				<th>Password</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Email</th>
+				<th>Reputation</th>
+				<th>Mailing Address</th>
+				<th>Phone</th>
+				<th>Gender</th>
+				<th>Money</th>
+				<th>Company</th>
+				<th>Company Type</th>
+			</tr>
+			
+			<% for(var i = 0;i < data.length;i++) { %>
+				 
+			<tr>
+				<td><%=data[i].id%></td>
+				<td><%=data[i].password%></td>
+				<td><%=data[i].username%></td>
+				<td><%=data[i].firstname%></td>
+				<td><%=data[i].lastname%></td>
+				<td><%=data[i].email%></td>
+				<td><%=data[i].reputation%></td>
+				<td><%=data[i].mailling_address%></td>
+				<td><%=data[i].phone%></td>
+				<td><%=data[i].gender%></td>
+				<td><%=data[i].money%></td>
+				<td><%=data[i].company%></td>
+				<td><%=data[i].companyType%></td>
+			</tr>
+			<% } %>
+		</table>
+	</div>
+</div>
 
 <!-- Bootstrapped Footer -->
 <!-- Footer -->

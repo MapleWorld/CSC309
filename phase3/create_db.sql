@@ -1,8 +1,10 @@
 -- Tested with MySQL v5.1.73
 
+-- Create the database first before executing the table query
 CREATE database communityFund;
 
 create table user (
+	-- General Data
 	id int AUTO_INCREMENT PRIMARY KEY,
 	username varchar(40) UNIQUE NOT NULL,
 	firstname varchar(40) NOT NULL,
@@ -11,9 +13,18 @@ create table user (
 	created_at datetime NOT NULL,
 	email varchar(40) UNIQUE NOT NULL,
 	reputation int DEFAULT 0,
-	mailing_address varchar(100),
+	
+	-- Initiator Data
 	phone varchar(20),
 	gender varchar(10),
+	mailing_address varchar(100),
+
+	-- Funder Data
+	money int 0,
+	company varchar(30),
+	companyType varchar(30),
+	
+	-- Admin
 	admin tinyint default 0 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
