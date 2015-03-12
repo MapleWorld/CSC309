@@ -27,7 +27,7 @@ app.use(session({
 	secret: 'Lonely Boy',
 	resave: true,
 	saveUninitialized: true,
-	cookie: { maxAge: 60000 }
+	cookie: {maxAge: 3600000}
 	}	
 ));
 app.use(flash());
