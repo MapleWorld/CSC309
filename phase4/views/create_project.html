@@ -1,0 +1,59 @@
+<!--Bootstrapped header -->
+<!-- Header -->
+<% include header.html %>
+
+<!--Bootstrapped nav bar-->
+<!-- Navigation -->
+<% include navbar.html %>
+
+<div id="create_project_form">
+
+	<form class="form-horizontal" id="create-project-form" method="post" autocomplete="on"> 
+		
+		<div class="create-project-form-err-area"></div>
+		
+		<div class="form-group">		
+			<h1 class="col-sm-7 control-label">Create project Form</h1>
+		</div>
+
+		<div class="form-group">
+	    	<label class="col-sm-5 control-label">Project Title</label>
+	    	<div class="col-xs-3">
+	      		<input id="project_name" name="project_name" required="required" type="text" class="form-control" placeholder="Super Cool Project" />
+	    	</div>
+	  	</div>
+	  	
+		<div class="form-group">
+	    	<label class="col-sm-5 control-label">Project Description</label>
+	    	<div class="col-xs-3">
+	      		<input id="project_description" name="project_description" required="required" class="form-control" placeholder="This project ..."/> 
+	    	</div>
+	  	</div>
+	  	
+	  	<div class="form-group">
+	    	<label class="col-sm-5 control-label">Project Community</label>
+	    	<div class="col-xs-3">
+				<select class="form-control" id="project_community" name="project_community">
+					<option value="health">Health</option>
+					<option value="education">Education</option>
+				  	<option value="technology">Technology</option>
+				  	<option value="finance">Finance</option>
+				  	<option value="travel">Travel</option>
+				</select>
+	    	</div>
+	  	</div>
+
+	  	<div class="form-group">
+	    	<div class="col-sm-offset-5">
+	      		<input type="button" class="btn btn-primary btn-lg" value="Create Project" onClick="createProject('#create-project-form', '.create-project-form-err-area')"/> 
+	    	</div>
+	  	</div>
+	</form>
+	
+	
+</div>
+
+
+<!-- Bootstrapped Footer -->
+<!-- Footer -->
+<% include footer.html %>

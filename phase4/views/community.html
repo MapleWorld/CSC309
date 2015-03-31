@@ -1,0 +1,43 @@
+<!--Bootstrapped header -->
+<!-- Header -->
+<% include header.html %>
+
+<!--Bootstrapped nav bar-->
+<!-- Navigation -->
+<% include navbar.html %>
+
+<!-- Page Content -->
+<div class="container">
+  <h2>Idea List</h2>
+  <p>All ideas for this industry.</p>            
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Idea ID</th>
+        <th>Idea Title</th>
+        <th>Idea Description</th>
+        <th>Number of Likes</th>
+        <th>Action</th>
+        <th>Like</th>
+      </tr>
+    </thead>
+    <tbody>
+    	
+		<% for(var i = 0;i < data.length;i++) { %>
+			<tr>
+				<td><%=data[i].id%></td>
+				<td><%=data[i].title%></td>
+				<td><%=data[i].description%></td>
+				<td><%=data[i].likes%></td>
+				<td><a class="idea-view" href="/idea/<%=data[i].id%>">View</a></td>
+				<td><button class="btn btn-primary" onClick="likeIdea('<%=data[i].id%>')">Like</button></td>
+			</tr>
+		<% } %>
+		
+    </tbody>
+  </table>
+</div>
+
+<!-- Bootstrapped Footer -->
+<!-- Footer -->
+<% include footer.html %>

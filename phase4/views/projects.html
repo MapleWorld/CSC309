@@ -1,0 +1,52 @@
+<!--Bootstrapped header -->
+<!-- Header -->
+<% include header.html %>
+
+<!--Bootstrapped nav bar-->
+<!-- Navigation -->
+<% include navbar.html %>
+
+<!-- Page Content -->
+<div class="container">
+  <h2>Detail and Information Of Available Ideas </h2>
+  <p></p>            
+  <table class="table table-hover">
+    <thead>
+		<tr>
+			<th width="50px">ID</th>
+			<th>Idea Title</th>
+			<th>Idea Description</th>
+			<th>Industry</th>
+			<th>Created Date</th>
+			<th>Number of Likes</th>
+			<th>Creator ID</th>
+			<th>Action</th>
+		</tr>
+    </thead>
+    <tbody>
+    	
+		<% for(var i = 0;i < data.length;i++) { %>
+			<tr>
+				<td><%=data[i].id%></td>
+				<td><%=data[i].title%></td>
+				<td><%=data[i].description%></td>
+				<td><%=data[i].industry%></td>
+				<td><%=data[i].created_date%></td>
+				<td><%=data[i].likes%></td>
+				<td><%=data[i].creator_id%></td>
+				<td>
+					<a class="idea-view" href="/idea/<%=data[i].id%>">View</a>
+	            	<a class="idea-edit" href="/edit_idea/<%=data[i].id%>">Edit</a>
+	            	<a class="idea-delete" onClick="deleteIdea(<%=data[i].id%>)">Delete</a>
+	        	</td>
+			</tr>
+		<% } %>
+		
+    </tbody>
+  </table>
+</div>
+
+
+<!-- Bootstrapped Footer -->
+<!-- Footer -->
+<% include footer.html %>
