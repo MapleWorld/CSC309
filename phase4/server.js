@@ -44,7 +44,7 @@ app.use(connection(mysql,{
     },'request')
 );
 
-// Routes
+// Routes	
 var router 			= express.Router();
 var home 			= require('./routes/home');
 var about 			= require('./routes/about');
@@ -76,7 +76,7 @@ app.use('/', create_project);
 //console.log(tools.currentTime());
 	
 //start Server
-var server = app.listen(9000,function(){
+var server = app.listen(8080,function(){
    console.log("Listening to port %s",server.address().port);
 });
 

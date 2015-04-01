@@ -9,16 +9,19 @@ create table user (
 	password varchar(100) NOT NULL,
 	created_date datetime NOT NULL,
 	comparable_date int default 0,
-	email varchar(40) UNIQUE NOT NULL
+	email varchar(40) UNIQUE NOT NULL,
+	
 	-- Initiator Data
 	phone varchar(20),
 	gender varchar(10),
 	mailing_address varchar(100),
+	initiator_reputation int default 0,
 
 	-- Funder Data
 	money int DEFAULT 0,
-	company varchar(30),
-	companyType varchar(30),
+	organization varchar(30),
+	interest varchar(30),
+	funder_reputation int default 0,
 	
 	-- Admin
 	admin tinyint default 0 NOT NULL
@@ -35,14 +38,16 @@ create table community (
 create table project (
 	id int AUTO_INCREMENT PRIMARY KEY,
 	name varchar(30) UNIQUE NOT NULL,
-	community varchar(30) UNIQUE NOT NULL,
-	funder_id int NOT NULL,
+	community varchar(30)  NOT NULL,
+	description varchar(200) NOT NULL,
 	initiator_id int NOT NULL,
 	created_date datetime NOT NULL,
 	comparable_date int default 0,
+	funding int DEFAULT 0,
+	donation int default 0,
+	payment int default 0,
+	funder_id int default 0,
 	likes int default 0,
-	description varchar(200) UNIQUE NOT NULL,
-	FOREIGN KEY (funder_id) references user(id),
-	FOREIGN KEY (initiator_id) references user(id),
-	funding int DEFAULT 0
+	goal int default 0,
+	FOREIGN KEY (initiator_id) references user(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

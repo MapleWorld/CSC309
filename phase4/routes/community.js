@@ -1,22 +1,22 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/industry/:idea_industry', function(req, res) {
+router.get('/community/:project_community', function(req, res) {
 	
-	var idea_industry = req.params.idea_industry;
+	var project_community = req.params.project_community;
 
     req.getConnection(function(err,conn){
 
         if (err) return next("Cannot Connect");
 
-        var query = conn.query('SELECT * FROM idea WHERE industry = ?',[idea_industry] , function(err,rows){
+        var query = conn.query('SELECT * FROM project WHERE community = ?',[project_community] , function(err,rows){
 
             if(err){
                 console.log(err);
                 return next("Mysql error, check your query");
             }
 
-			res.render('industry', {notif: req.flash('notif'),
+			res.render('community', {notif: req.flash('notif'),
 					 auth: req.session.authenticated,
 					 data:rows});	
          });

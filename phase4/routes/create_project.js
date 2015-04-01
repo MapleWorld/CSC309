@@ -36,8 +36,8 @@ router.post('/create_project', function (req, res) {
 	// Get data
 	var data = {
 		name 			: req.body.project_name,
-		description 	: req.body.project_description,
 		community 		: req.body.project_community,
+		description 	: req.body.project_description,
 		initiator_id	: req.session.data.id,
 		created_date 	: tools.currentTime()[0],
 		comparable_date	: tools.currentTime()[1]
@@ -57,7 +57,6 @@ router.post('/create_project', function (req, res) {
 				var errors = {
 					msg: err.code
 				};
-	
 				res.status(422).json([errors]);
 				return ;
 			}

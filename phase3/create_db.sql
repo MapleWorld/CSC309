@@ -1,8 +1,5 @@
 -- Tested with MySQL v5.1.73
 
--- Create the database first before executing the table query
-CREATE database communityFund;
-
 create table user (
 	-- General Data
 	id int AUTO_INCREMENT PRIMARY KEY,

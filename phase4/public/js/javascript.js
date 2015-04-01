@@ -27,6 +27,16 @@ function findProjects(formID, errorDivID){
 	errorMessage(urlAddress, formID, errorDivID, "post");
 }
 
+function funderUpdateData(formID, errorDivID){
+	urlAddress = '/funder/update';
+	errorMessage(urlAddress, formID, errorDivID, "put");
+}
+
+function initiatorUpdateData(formID, errorDivID){
+	urlAddress = '/initiator/update';
+	errorMessage(urlAddress, formID, errorDivID, "put");
+}
+
 function loginUser(formID, errorDivID){
 	urlAddress = '/login';
 	errorMessage(urlAddress, formID, errorDivID, "post");
