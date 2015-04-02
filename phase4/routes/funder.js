@@ -12,7 +12,6 @@ router.get('/funder', function(req, res) {
 					 auth: req.session.authenticated});		
 });
 
-
 // Put data to DB | PUT
 router.put('/funder/update', function (req, res) {
 

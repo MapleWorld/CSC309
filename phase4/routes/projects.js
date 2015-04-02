@@ -17,11 +17,11 @@ router.get('/projects', function(req, res, next) {
 
 			res.render('projects', {notif: req.flash('notif'),
 					 auth: req.session.authenticated,
-					 data:rows});	
+					 data:rows,
+					 admin: req.session.data.admin});	
          });
     });
 })
-
 
 // Get top k project data
 router.get('/projects/best/:k', function(req, res, next) {
@@ -41,7 +41,8 @@ router.get('/projects/best/:k', function(req, res, next) {
 
 			res.render('projects', {notif: req.flash('notif'),
 					 auth: req.session.authenticated,
-					 data:rows});	
+					 data:rows,
+					 admin: req.session.data.admin});	
          });
     });
 })
@@ -62,7 +63,8 @@ router.get('/projects/date', function(req, res, next) {
 
 			res.render('projects', {notif: req.flash('notif'),
 					 auth: req.session.authenticated,
-					 data:rows});	
+					 data:rows,
+					 admin: req.session.data.admin});	
          });
 
     });
@@ -84,7 +86,8 @@ router.get('/projects/likes', function(req, res, next) {
 
 			res.render('projects', {notif: req.flash('notif'),
 					 auth: req.session.authenticated,
-					 data:rows});	
+					 data:rows,
+					 admin: req.session.data.admin});	
          });
 
     });
@@ -126,7 +129,8 @@ router.post('/projects/find', function(req, res) {
 			req.flash('notif', 'Successful');
 			res.send({redirect: '/projects/find/' + query_string,
 					auth: req.session.authenticated,
-					data:rows});	
+					data:rows,
+					admin: req.session.data.admin});	
 			
          });
     });
@@ -151,7 +155,8 @@ router.get('/projects/find/:query', function(req, res, next) {
 
 			res.render('projects', {notif: req.flash('notif'),
 					 auth: req.session.authenticated,
-					 data:rows});	
+					 data:rows,
+					 admin: req.session.data.admin});	
          });
     });
 })

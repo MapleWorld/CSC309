@@ -18,7 +18,8 @@ router.get('/community/:project_community', function(req, res) {
 
 			res.render('community', {notif: req.flash('notif'),
 					 auth: req.session.authenticated,
-					 data:rows});	
+					 data:rows,
+					 admin: req.session.data.admin});	
          });
 
     });

@@ -24,6 +24,7 @@ router.post('/create_project', function (req, res) {
 	req.assert('project_name', 'Name is required').notEmpty();
 	req.assert('project_description','Description is required').notEmpty();
 	req.assert('project_community','Community is required').notEmpty();
+	req.assert('project_goal','A goal is required').notEmpty();
 
 	var errors = req.validationErrors();
 
@@ -38,6 +39,7 @@ router.post('/create_project', function (req, res) {
 		name 			: req.body.project_name,
 		community 		: req.body.project_community,
 		description 	: req.body.project_description,
+		goal			: req.body.project_goal,
 		initiator_id	: req.session.data.id,
 		created_date 	: tools.currentTime()[0],
 		comparable_date	: tools.currentTime()[1]

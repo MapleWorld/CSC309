@@ -2,6 +2,9 @@
 
 -- CREATE SCHEMA communityfund;
 
+-- insert into user (username, password, created_date, email, mailing_address, phone, gender, money, organization, interest, admin) values 
+--	('user1','password', '2014-10-23 20:04:25', 'test1@email.com', 'toronto', '416-888-8888', 'male', 999999, 'Uoft', 'health', 1); 
+	
 create table user (
 	-- General Data
 	id int AUTO_INCREMENT PRIMARY KEY,
@@ -12,6 +15,8 @@ create table user (
 	email varchar(40) UNIQUE NOT NULL,
 	
 	-- Initiator Data
+	firstname varchar(20),
+	lastname varchar(20),
 	phone varchar(20),
 	gender varchar(10),
 	mailing_address varchar(100),
@@ -51,3 +56,7 @@ create table project (
 	goal int default 0,
 	FOREIGN KEY (initiator_id) references user(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+	
+	

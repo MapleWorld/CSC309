@@ -8,43 +8,85 @@
 
 <!-- Page Content -->
 <div class="container">
-  <h2>This Project</h2>
-  <p>Detail and Information of This Project</p>            
-  <table class="table table-hover">
-    <thead>
-		<tr>
-			<th width="50px">ID</th>
-			<th>Project Name</th>
-			<th>Project Description</th>
-			<th>Community</th>
-			<th>Created Date</th>
-			<th>Number of Likes</th>
-			<th>Creator ID</th>
-			<th>Action</th>
-		</tr>
-    </thead>
-    <tbody>
-    	
-		<% for(var i = 0;i < data.length;i++) { %>
-			<tr>
-				<td><%=data[i].id%></td>
-				<td><%=data[i].name%></td>
-				<td><%=data[i].description%></td>
-				<td><%=data[i].community%></td>
-				<td><%=data[i].created_date%></td>
-				<td><%=data[i].likes%></td>
-				<td><%=data[i].initiator_id%></td>
-				<td>
-	            	<a class="project-edit" href="/edit_project/<%=data[i].id%>">Edit</a>
-	            	<a class="project-delete" onClick="deleteProject(<%=data[i].id%>)">Delete</a>
-	        	</td>
-			</tr>
-		<% } %>
+	<% for(var i = 0;i < data.length;i++) { %>
+		<div id="project_info_form">
 		
-    </tbody>
-  </table>
-</div>
+			<form class="form-horizontal" id="project-info-form" method="post" autocomplete="on"> 
+				
+				<div class="project-info-form-err-area"></div>
+				
+				<div class="form-group">		
+					<h1 class="col-sm-8 control-label">Project Information Form</h1>
+				</div>
+		
+				<div class="form-group">
+			    	<label>Project Name: </label>
+			    	<p ><%=data[i].name%></p>
+			  	</div>
+			  	
+				<div class="form-group">
+			    	<label>Project Description</label>
+			    	<p><%=data[i].description%></p>
+			  	</div>
+			  	
+			  	<div class="form-group">
+			    	<label>Project Community</label>
+			    	<p><%=data[i].community%></p>
+			  	</div>
+		
+				<div class="form-group">
+			    	<label >Project Created Date: </label>
+			    	<p><%=data[i].created_date%></p>
+			  	</div>
+		
+				<div class="form-group">
+			    	<label >Project Initiator ID: </label>
+			    	<p><%=data[i].initiator_id%></p>
+			  	</div>
+			  	
+				<div class="form-group">
+					<table class="table table-hover">
+					    <thead>
+							<tr>
+								<th>Total Funding</th>
+								<th>Donation</th>
+								<th>Payment</th>
+								<th>Goal</th>
+								<th>Likes</th>
+							</tr>
+					    </thead>
+					    <tbody>
+							<tr>
+								<td><%=data[i].funding%></td>
+								<td><%=data[i].donation%></td>
+								<td><%=data[i].payment%></td>
+								<td><%=data[i].goal%></td>
+								<td><%=data[i].likes%></td>
+							</tr>
+					    </tbody>
+					</table>
+			  	</div>
 
+				<div class="form-group">
+			    	<label class="col-sm-5 control-label">Fund Project</label>
+			    	<div class="col-xs-3">	    	
+					    <div class="input-group">
+					    	<div class="input-group-addon">$</div>
+					    	<input id="project_goal" name="project_goal" type="number" min=0 class="form-control" placeholder="Amount">
+					    	<div class="input-group-addon">.00</div>
+					    </div>
+				    </div>
+			  	</div>
+	  	
+			  	<div class="form-group">
+			    	<div class="col-sm-offset-5">
+			      		<input type="button" class="btn btn-primary btn-lg" value="Fund Project" onClick="fundProject('#project-info-form', '.project-info-form-err-area', '<%=data[0].id%>')"/> 
+			    	</div>
+			  	</div>
+			</form>
+		</div>
+	<% } %>
+</div>
 <!-- Bootstrapped Footer -->
 <!-- Footer -->
 <% include footer.html %>

@@ -27,7 +27,8 @@ router.get('/profile', function(req, res) {
 				res.render('profile', {notif: req.flash('notif'),
 					 auth: req.session.authenticated,
 					 data: rows,
-					 user_id: req.session.data.id});
+					 user_id: req.session.data.id,
+					 admin: req.session.data.admin});
 			});
 	
 		});	

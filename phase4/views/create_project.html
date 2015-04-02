@@ -26,8 +26,19 @@
 		<div class="form-group">
 	    	<label class="col-sm-5 control-label">Project Description</label>
 	    	<div class="col-xs-3">
-	      		<textarea id="project_description" name="project_description" required="required" class="form-control" rows="3" > Blahah</textarea>
+	      		<textarea id="project_description" name="project_description" required="required" class="form-control" rows="3" placeholder="Information about the project"></textarea>
 	    	</div>
+	  	</div>
+	  
+		<div class="form-group">
+	    	<label class="col-sm-5 control-label">Project Funding Goal</label>
+	    	<div class="col-xs-3">	    	
+			    <div class="input-group">
+			    	<div class="input-group-addon">$</div>
+			    	<input id="project_goal" name="project_goal" type="number" min=0 class="form-control" placeholder="Amount">
+			    	<div class="input-group-addon">.00</div>
+			    </div>
+		    </div>
 	  	</div>
 	  	
 	  	<div class="form-group">

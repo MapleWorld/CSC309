@@ -31,11 +31,10 @@ router.get('/project/:project_id', function(req, res, next) {
 
 			res.render('project', {notif: req.flash('notif'),
 					 auth: req.session.authenticated,
-					 data:rows});	
+					 data:rows,
+					 admin: req.session.data.admin});	
 		});
-		
 	});
-	
 });
 
 // Delete this project
@@ -60,7 +59,6 @@ router.delete('/delete_project/:project_id', function (req, res) {
         });
 	});
 });
-
 
 // Get specific project data
 router.get('/edit_project/:project_id', function(req, res, next) {
@@ -95,16 +93,16 @@ router.get('/edit_project/:project_id', function(req, res, next) {
 
 // Update this project 
 router.put('/edit_project/:project_id', function (req, res) {
-
     var project_id = req.params.project_id;
 
     var data = {
-        name: 			req.body.project_name,
-        description:	req.body.project_description,
-        community: 		req.body.project_community
-     };
-     
-     req.getConnection(function (err, conn) {
+        name			:req.body.project_name,
+        description		:req.body.project_description,
+        community		:req.body.project_community,
+        goal			:req.body.project_goal
+	};
+
+	req.getConnection(function (err, conn) {
 
         if (err) return next("Cannot Connect");
 
@@ -116,7 +114,6 @@ router.put('/edit_project/:project_id', function (req, res) {
 
 			req.flash('notif', 'You have successfully updated this project.');
 			res.send({redirect: '/profile'});
-
         });
 	});
 });
