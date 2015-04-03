@@ -34,15 +34,6 @@ create table user (
 	admin tinyint default 0 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-create table community (
-	id int AUTO_INCREMENT PRIMARY KEY,
-	name varchar(100) UNIQUE NOT NULL,
-	category varchar(100) UNIQUE NOT NULL,
-	member_id int NOT NULL,
-	FOREIGN KEY (member_id) references user(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
 create table funding (
 	f_id int AUTO_INCREMENT PRIMARY KEY,
 	project_id int NOT NULL,

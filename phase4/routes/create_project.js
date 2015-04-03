@@ -22,7 +22,6 @@ router.get('/create_project', function(req, res) {
 					 auth: req.session.authenticated});					
 });
 
-
 //post data to DB | POST
 router.post('/create_project', function (req, res) {
 

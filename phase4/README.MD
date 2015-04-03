@@ -1,8 +1,11 @@
-Already created a test user account
+A test and admin user account are already created for testing purpose
 User name: test
 Password: 111111
 
-To see a live version, visit http://ec2-52-1-96-34.compute-1.amazonaws.com:9000/
+User name: admin
+Password: 111111
+
+To see a live version, visit http://ec2-52-1-96-34.compute-1.amazonaws.com:8080
 
 To run locally, follow the steps below:
 
@@ -11,7 +14,7 @@ server.js Change user and password to your database user name and password
 
 	app.use(connection(mysql,{
 		host     		: 'localhost',
-		database 	: 'individualproject',
+		database 	: 'communityfund',
 		user     		: 'root',
 		password 	: 'root'
 		},'request')
@@ -37,5 +40,5 @@ Then run the server.js file
 	
 Then in your browser, navigate to
 
-	localhost:9000
+	localhost:8080
 	
