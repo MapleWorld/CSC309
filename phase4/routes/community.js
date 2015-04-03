@@ -16,10 +16,16 @@ router.get('/community/:project_community', function(req, res) {
                 return next("Mysql error, check your query");
             }
 
+			if (req.session.authenticated){
 			res.render('community', {notif: req.flash('notif'),
 					 auth: req.session.authenticated,
 					 data:rows,
 					 admin: req.session.data.admin});	
+			}else{
+				res.render('community', {notif: req.flash('notif'),
+						 auth: req.session.authenticated,
+						 data:rows});	
+			}
          });
 
     });

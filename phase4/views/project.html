@@ -11,9 +11,7 @@
 	<div id="project_info_form">
 	
 		<form class="form-horizontal" id="project-info-form" method="post" autocomplete="on"> 
-			
-			<div class="project-info-form-err-area"></div>
-			
+					
 			<div class="form-group">		
 				<h1 class="col-sm-8 control-label">Project Information Form</h1>
 			</div>
@@ -64,7 +62,7 @@
 							<td>$<%=total_funding%></td>
 							<td>$<%=total_donation%></td>
 							<td>$<%=total_payment%></td>
-							<td><%=data[0].goal%></td>
+							<td>$<%=data[0].goal%></td>
 							<td><%=data[0].likes%></td>
 						</tr>
 				    </tbody>
@@ -94,29 +92,36 @@
 				</table>
 		  	</div>
 		  	
-			<div class="form-group">
-		    	<label class="col-sm-5 control-label">Fund Project</label>
-		    	<div class="col-xs-3">	    	
-				    <div class="input-group">
-				    	<div class="input-group-addon">$</div>
-				    	<input id="project_fund_amount" name="project_fund_amount" type="number" min=0 class="form-control" placeholder="Amount">
-				    	<div class="input-group-addon">.00</div>
-				    </div>
-				    
-					<label class="radio-inline">
-					  <input type="radio" name="project_fund_option" id="project_dontation" value="donation" checked> Donation
-					</label>
-					<label class="radio-inline">
-					  <input type="radio" name="project_fund_option" id="project_payment" value="payment"> Payment
-					</label>
-				</div>
-		  	</div>
-  	
-		  	<div class="form-group">
-		    	<div class="col-sm-offset-5">
-		      		<input type="button" class="btn btn-primary btn-lg" value="Fund Project" onClick="fundProject('#project-info-form', '.project-info-form-err-area', '<%=data[0].p_id%>', '<%=user_id%>')"/> 
-		    	</div>																				
-		  	</div>
+		  	<% if(auth) { %>
+				<div class="form-group">
+					
+					<div class="project-info-form-err-area"></div>
+					
+			    	<label class="col-sm-5 control-label">Fund Project</label>
+			    				
+			    	<div class="col-xs-3">	    	
+					    <div class="input-group">
+					    	<div class="input-group-addon">$</div>
+					    	<input id="project_fund_amount" name="project_fund_amount" type="number" min=0 class="form-control" placeholder="Amount">
+					    	<div class="input-group-addon">.00</div>
+					    </div>
+					    
+						<label class="radio-inline">
+						  <input type="radio" name="project_fund_option" id="project_dontation" value="donation" checked> Donation
+						</label>
+						<label class="radio-inline">
+						  <input type="radio" name="project_fund_option" id="project_payment" value="payment"> Payment
+						</label>
+					</div>
+			  	</div>
+	  	
+			  	<div class="form-group">
+			    	<div class="col-sm-offset-5">
+			      		<input type="button" class="btn btn-primary btn-lg" value="Fund Project" onClick="fundProject('#project-info-form', '.project-info-form-err-area', '<%=data[0].p_id%>', '<%=user_id%>', '<%=data[0].community%>')"/> 
+			    	</div>																				
+			  	</div>
+			<% } %>
+			
 		</form>
 	</div>
 </div>

@@ -31,11 +31,17 @@ router.get('/project/:project_id', function(req, res, next) {
 				return res.send("Project Not found");
 			}
 
-			res.render('project', {notif: req.flash('notif'),
-					 auth: req.session.authenticated,
-					 data:rows,
-					 user_id: req.session.data.id,
-					 admin: req.session.data.admin});	
+			if (req.session.authenticated){
+				res.render('project', {notif: req.flash('notif'),
+						 auth: req.session.authenticated,
+						 data:rows,
+						 user_id: req.session.data.id,
+						 admin: req.session.data.admin});	
+			}else{
+				res.render('project', {notif: req.flash('notif'),
+						 auth: req.session.authenticated,
+						 data:rows});	
+			}
 		});
 	});
 });
@@ -127,31 +133,37 @@ router.put('/like/:project_id', function (req, res) {
 	// Increment like by 1 for this project
     var project_id = req.params.project_id;
     
-    req.getConnection(function (err, conn) {
-	
-	    if (err) return next("Cannot Connect");
-	
-		var query = conn.query("SELECT * FROM project WHERE p_id = ? ",[project_id], function(err,rows){
-			if(err){
-				console.log(err);
-				return next("Mysql error, check your query");
-			}
+    if (req.session.authenticated){
+	    req.getConnection(function (err, conn) {
 		
-			var data = rows[0];
-			data.likes += 1;
-			
-			var updateQuery = conn.query("UPDATE project set ? WHERE p_id = ? ",[data,project_id], function(err, rows){
+		    if (err) return next("Cannot Connect");
+		
+			var query = conn.query("SELECT * FROM project WHERE p_id = ? ",[project_id], function(err,rows){
 				if(err){
 					console.log(err);
 					return next("Mysql error, check your query");
 				}
 			
-				req.flash('notif', 'You liked this project.');
-				res.send({redirect: '/'});
-			
+				var data = rows[0];
+				data.likes += 1;
+				
+				var updateQuery = conn.query("UPDATE project set ? WHERE p_id = ? ",[data,project_id], function(err, rows){
+					if(err){
+						console.log(err);
+						return next("Mysql error, check your query");
+					}
+				
+					req.flash('notif', 'You liked this project.');
+					res.send({redirect: '/'});
+				
+				});
 			});
-		});
-	});
+		});	
+	}else{
+		req.flash('notif', 'You are not login.');
+		res.render('login', {notif: req.flash('notif'),
+						 auth: req.session.authenticated});				
+	}
 });
 
 // Add fund to project to the DB || POST
@@ -159,6 +171,7 @@ router.post('/project/fund/:project_funder_id', function (req, res) {
 
     var projectID = req.params.project_funder_id.split("-")[0];
     var funderID = req.params.project_funder_id.split("-")[1];
+    var community = req.params.project_funder_id.split("-")[2];
     
 	// Validation
 	req.assert('project_fund_amount', 'A number is required').notEmpty();
@@ -186,6 +199,9 @@ router.post('/project/fund/:project_funder_id', function (req, res) {
 	}
 	else if (req.session.data.money - data.fund_amount < 0){
 		req.flash('notif', 'You do not have enough money in your account');
+		res.send({redirect: '/'});
+	}else if (req.session.data.interest !== community){
+		req.flash('notif', 'This project does not belongs to your interested community');
 		res.send({redirect: '/'});
 	}else{
 		// Inserting into MySQL

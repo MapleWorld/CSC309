@@ -41,16 +41,21 @@
 							<td><%=data[i].name%></td>
 							<td><%=data[i].description%></td>
 							<td><%=data[i].likes%></td>
-							<% if(admin) { %>
-								<td>
-									<a class="idea-view" href="/project/<%=data[i].p_id%>">View</a>
-					            	<a class="project-edit" href="/edit_project/<%=data[i].p_id%>">Edit</a>
-					            	<a class="project-delete" onClick="deleteProject(<%=data[i].p_id%>)">Delete</a>
-					        	</td>
-							<% } else { %>
+							<% if(!auth) { %>
 								<td><a class="idea-view" href="/project/<%=data[i].p_id%>">View</a></td>
+							<% } else { %>
+								<% if(admin) { %>
+									<td>
+										<a class="idea-view" href="/project/<%=data[i].p_id%>">View</a>
+						            	<a class="project-edit" href="/edit_project/<%=data[i].p_id%>">Edit</a>
+						            	<a class="project-delete" onClick="deleteProject(<%=data[i].p_id%>)">Delete</a>
+						            	<td><button class="btn btn-primary" onClick="likeProject('<%=data[i].p_id%>')">Like</button></td>
+						        	</td>
+								<% } else { %>
+									<td><a class="idea-view" href="/project/<%=data[i].p_id%>">View</a></td>
+									<td><button class="btn btn-primary" onClick="likeProject('<%=data[i].p_id%>')">Like</button></td>
+								<% }; %>
 							<% }; %>
-							<td><button class="btn btn-primary" onClick="likeProject('<%=data[i].p_id%>')">Like</button></td>
 						</tr>
 					<% } %>
 				

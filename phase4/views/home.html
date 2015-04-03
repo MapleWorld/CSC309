@@ -35,43 +35,44 @@
 				<a href="/projects/date" class="list-group-item">Most Recent</a>	
 		</div>
 
-		<div class="col-md-9">
-			<div class="find-project-form-err-area"></div>
-
-			<form class="form-horizontal" method="post" id="find-project-form" autocomplete="on">
-				<div class="form-group">		
-					<h1 class="col-sm-7 control-label">Find Project Form </h1>
-				</div>
-				
-				<div class="form-group">
-			    	<label class="col-sm-4 control-label">k: </label>
-			    	<div class="col-xs-3">
-			      		<input id="number_k" name="number_k" type="text" class="form-control" placeholder="Number of top projects">
-			    	</div>
-			  	</div>
-			  	
-			  	<div class="form-group">
-			    	<label class="col-sm-4 control-label">Starting Date: </label>
-			    	<div class="col-xs-3">
-			      		<input name="starting_date" type="text" class="form-control" id="datepicker-start">
-			    	</div>
-			  	</div>
-			  	
-			  	<div class="form-group">
-			    	<label class="col-sm-4 control-label">Ending Date: </label>
-			    	<div class="col-xs-3">
-			      		<input name="ending_date" type="text" class="form-control" id="datepicker-end">
-			    	</div>
-			  	</div>
-		
-			  	<div class="form-group">
-			    	<div class="col-sm-offset-4">
-			      		<input type="button" class="btn btn-primary btn-lg" value="Find" onClick="findProjects('#find-project-form', '.find-project-form-err-area')"/> 
-			    	</div>
-			  	</div>
-			</form>
-
-		</div>
+		<% if (auth) { %>
+			<div class="col-md-9">
+				<div class="find-project-form-err-area"></div>
+	
+				<form class="form-horizontal" method="post" id="find-project-form" autocomplete="on">
+					<div class="form-group">		
+						<h1 class="col-sm-7 control-label">Find Project Form </h1>
+					</div>
+					
+					<div class="form-group">
+				    	<label class="col-sm-4 control-label">k: </label>
+				    	<div class="col-xs-3">
+				      		<input id="number_k" name="number_k" type="text" class="form-control" placeholder="Number of top projects">
+				    	</div>
+				  	</div>
+				  	
+				  	<div class="form-group">
+				    	<label class="col-sm-4 control-label">Starting Date: </label>
+				    	<div class="col-xs-3">
+				      		<input name="starting_date" type="text" class="form-control" id="datepicker-start">
+				    	</div>
+				  	</div>
+				  	
+				  	<div class="form-group">
+				    	<label class="col-sm-4 control-label">Ending Date: </label>
+				    	<div class="col-xs-3">
+				      		<input name="ending_date" type="text" class="form-control" id="datepicker-end">
+				    	</div>
+				  	</div>
+			
+				  	<div class="form-group">
+				    	<div class="col-sm-offset-4">
+				      		<input type="button" class="btn btn-primary btn-lg" value="Find" onClick="findProjects('#find-project-form', '.find-project-form-err-area')"/> 
+				    	</div>
+				  	</div>
+				</form>
+			</div>
+		<% } %>
 	</div>
 </div>
 

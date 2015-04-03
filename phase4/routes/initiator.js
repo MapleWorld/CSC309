@@ -18,7 +18,7 @@ router.put('/initiator/update', function (req, res) {
 
 	// Validation
 	req.assert('initiator_firstname', 'First Name is required').notEmpty();
-	req.assert('initiator_last','Last Name' is required').notEmpty();
+	req.assert('initiator_last','Last Name is required').notEmpty();
 	req.assert('initiator_address', 'Mailing Address is required').notEmpty();
 	req.assert('initiator_phone','Phone Number is required').notEmpty();
 	req.assert('initiator_gender','Gender is required').notEmpty();

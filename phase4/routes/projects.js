@@ -15,10 +15,16 @@ router.get('/projects', function(req, res, next) {
                 return next("Mysql error, check your query");
             }
 
-			res.render('projects', {notif: req.flash('notif'),
-					 auth: req.session.authenticated,
-					 data:rows,
-					 admin: req.session.data.admin});	
+			if (req.session.authenticated){
+				res.render('projects', {notif: req.flash('notif'),
+						 auth: req.session.authenticated,
+						 data:rows,
+						 admin: req.session.data.admin});	
+			}else{
+				res.render('projects', {notif: req.flash('notif'),
+						 auth: req.session.authenticated,
+						 data:rows});	
+			}
          });
     });
 })
@@ -39,10 +45,16 @@ router.get('/projects/best/:k', function(req, res, next) {
                 return next("Mysql error, check your query");
             }
 
-			res.render('projects', {notif: req.flash('notif'),
-					 auth: req.session.authenticated,
-					 data:rows,
-					 admin: req.session.data.admin});	
+			if (req.session.authenticated){
+				res.render('projects', {notif: req.flash('notif'),
+						 auth: req.session.authenticated,
+						 data:rows,
+						 admin: req.session.data.admin});	
+			}else{
+				res.render('projects', {notif: req.flash('notif'),
+						 auth: req.session.authenticated,
+						 data:rows});	
+			}
          });
     });
 })
@@ -61,10 +73,17 @@ router.get('/projects/date', function(req, res, next) {
                 return next("Mysql error, check your query");
             }
 
-			res.render('projects', {notif: req.flash('notif'),
-					 auth: req.session.authenticated,
-					 data:rows,
-					 admin: req.session.data.admin});	
+			if (req.session.authenticated){
+				res.render('projects', {notif: req.flash('notif'),
+						 auth: req.session.authenticated,
+						 data:rows,
+						 admin: req.session.data.admin});	
+			}else{
+				res.render('projects', {notif: req.flash('notif'),
+						 auth: req.session.authenticated,
+						 data:rows});	
+			}
+					 
          });
 
     });
@@ -84,10 +103,16 @@ router.get('/projects/likes', function(req, res, next) {
                 return next("Mysql error, check your query");
             }
 
-			res.render('projects', {notif: req.flash('notif'),
-					 auth: req.session.authenticated,
-					 data:rows,
-					 admin: req.session.data.admin});	
+			if (req.session.authenticated){
+				res.render('projects', {notif: req.flash('notif'),
+						 auth: req.session.authenticated,
+						 data:rows,
+						 admin: req.session.data.admin});	
+			}else{
+				res.render('projects', {notif: req.flash('notif'),
+						 auth: req.session.authenticated,
+						 data:rows});	
+			}
          });
 
     });

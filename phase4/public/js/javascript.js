@@ -22,8 +22,8 @@ function errorMessage(urlAddress, formID, errorDivID, action){
    });
 }
 
-function fundProject(formID, errorDivID, projectID, funderID){
-	urlAddress = '/project/fund/' + projectID + "-" + funderID;
+function fundProject(formID, errorDivID, projectID, funderID, projectCommunity){
+	urlAddress = '/project/fund/' + projectID + "-" + funderID + "-" + projectCommunity;
 	errorMessage(urlAddress, formID, errorDivID, "post");
 }
 
