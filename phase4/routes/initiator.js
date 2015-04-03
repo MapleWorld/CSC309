@@ -4,6 +4,7 @@ var router = express.Router();
 router.get('/initiator', function(req, res) {
 	if(req.session.authenticated) {
 		res.render('initiator', {notif: req.flash('notif'),
+						user_id: req.session.data.id,
 						auth: req.session.authenticated});	
 		return ;		
 	}
@@ -16,6 +17,8 @@ router.get('/initiator', function(req, res) {
 router.put('/initiator/update', function (req, res) {
 
 	// Validation
+	req.assert('initiator_firstname', 'First Name is required').notEmpty();
+	req.assert('initiator_last','Last Name' is required').notEmpty();
 	req.assert('initiator_address', 'Mailing Address is required').notEmpty();
 	req.assert('initiator_phone','Phone Number is required').notEmpty();
 	req.assert('initiator_gender','Gender is required').notEmpty();
@@ -28,9 +31,12 @@ router.put('/initiator/update', function (req, res) {
 	}
 
 	var data = {
+		firstname 		: req.body.initiator_firstname,
+		lastname		: req.body.initiator_lastname,
 		mailing_address	: req.body.initiator_address,
+		gender		 	: req.body.initiator_gender,
 		phone	 		: req.body.initiator_phone,
-		gender		 	: req.body.initiator_gender
+		initiator_ready	: 1
 	};
 
 	req.getConnection(function (err, conn) {
@@ -43,8 +49,24 @@ router.put('/initiator/update', function (req, res) {
 				return next("Mysql error, check your query");
 			}
 
-			req.flash('notif', 'You have successfully completed the initiator form');
-			res.send({redirect: '/profile'});
+			// Update the user session
+			var sql = 'SELECT * FROM user WHERE id =' + conn.escape(req.session.data.id);
+						
+			conn.query(sql, function(err, rows) {
+				if (err) {
+					console.log(err);
+				}
+				
+				if (rows.length == 0){
+					console.log("Can't update user session");
+					return ;
+				} 
+				
+				req.flash('notif', 'You have successfully completed the initiator form');
+				req.session.data = rows[0];
+	            req.session.authenticated = true;
+				res.send({redirect: '/profile'});
+			});
         });
 	});
 });

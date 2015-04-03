@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+// Include external javascript functions 
+var tools = require('../public/js/tools');
 
 router.get('/project', function(req, res) {
 	res.render('project', {notif: req.flash('notif'),
@@ -17,7 +19,7 @@ router.get('/project/:project_id', function(req, res, next) {
 			return next("Cannot Connect");
 		}
 
-		var query = conn.query("SELECT * FROM project WHERE id = ? ",[project_id], function(err,rows){
+		var query = conn.query("SELECT * FROM project LEFT JOIN funding ON project.p_id = funding.project_id WHERE project.p_id = ? ",[project_id], function(err,rows){
 
 			if(err){
 				console.log(err);
@@ -32,6 +34,7 @@ router.get('/project/:project_id', function(req, res, next) {
 			res.render('project', {notif: req.flash('notif'),
 					 auth: req.session.authenticated,
 					 data:rows,
+					 user_id: req.session.data.id,
 					 admin: req.session.data.admin});	
 		});
 	});
@@ -46,7 +49,7 @@ router.delete('/delete_project/:project_id', function (req, res) {
 
         if (err) return next("Cannot Connect");
 
-        var query = conn.query("DELETE FROM project WHERE id = ? ",[project_id], function(err, rows){
+        var query = conn.query("DELETE FROM project WHERE p_id = ? ",[project_id], function(err, rows){
 
 			if(err){
 				console.log(err);
@@ -70,7 +73,7 @@ router.get('/edit_project/:project_id', function(req, res, next) {
 			return next("Cannot Connect");
 		}
 
-		var query = conn.query("SELECT * FROM project WHERE id = ? ",[project_id], function(err,rows){
+		var query = conn.query("SELECT * FROM project WHERE p_id = ? ",[project_id], function(err,rows){
 
 			if(err){
 				console.log(err);
@@ -106,7 +109,7 @@ router.put('/edit_project/:project_id', function (req, res) {
 
         if (err) return next("Cannot Connect");
 
-        var query = conn.query("UPDATE project set ? WHERE id = ? ",[data,project_id], function(err, rows){
+        var query = conn.query("UPDATE project set ? WHERE p_id = ? ",[data,project_id], function(err, rows){
 			if(err){
 				console.log(err);
 				return next("Mysql error, check your query");
@@ -118,18 +121,17 @@ router.put('/edit_project/:project_id', function (req, res) {
 	});
 });
 
-
 // Update the number of like for this project 
 router.put('/like/:project_id', function (req, res) {
 
 	// Increment like by 1 for this project
     var project_id = req.params.project_id;
     
-    	req.getConnection(function (err, conn) {
+    req.getConnection(function (err, conn) {
 	
 	    if (err) return next("Cannot Connect");
 	
-		var query = conn.query("SELECT * FROM project WHERE id = ? ",[project_id], function(err,rows){
+		var query = conn.query("SELECT * FROM project WHERE p_id = ? ",[project_id], function(err,rows){
 			if(err){
 				console.log(err);
 				return next("Mysql error, check your query");
@@ -138,7 +140,7 @@ router.put('/like/:project_id', function (req, res) {
 			var data = rows[0];
 			data.likes += 1;
 			
-			var updateQuery = conn.query("UPDATE project set ? WHERE id = ? ",[data,project_id], function(err, rows){
+			var updateQuery = conn.query("UPDATE project set ? WHERE p_id = ? ",[data,project_id], function(err, rows){
 				if(err){
 					console.log(err);
 					return next("Mysql error, check your query");
@@ -152,5 +154,73 @@ router.put('/like/:project_id', function (req, res) {
 	});
 });
 
+// Add fund to project to the DB || POST
+router.post('/project/fund/:project_funder_id', function (req, res) {
+
+    var projectID = req.params.project_funder_id.split("-")[0];
+    var funderID = req.params.project_funder_id.split("-")[1];
+    
+	// Validation
+	req.assert('project_fund_amount', 'A number is required').notEmpty();
+	req.assert('project_fund_option','An option is required').notEmpty();
+
+	var errors = req.validationErrors();
+
+	if (errors) {
+		res.status(422).json(errors);
+		return;
+	}
+	// Create JSON Data Set
+	var data = {
+		project_id 				: projectID,
+		funder_id 				: funderID,
+		fund_amount 			: req.body.project_fund_amount,
+		fund_option 			: req.body.project_fund_option,
+		fund_date 				: tools.currentTime()[0],
+		fund_comparable_date	: tools.currentTime()[1]
+	};
+
+	if (req.session.data.funder_ready == 0){
+		req.flash('notif', 'You are not a funder.');
+		res.send({redirect: '/'});
+	}
+	else if (req.session.data.money - data.fund_amount < 0){
+		req.flash('notif', 'You do not have enough money in your account');
+		res.send({redirect: '/'});
+	}else{
+		// Inserting into MySQL
+		req.getConnection(function (err, conn) {
+	
+			if (err){
+				console.log(err);
+				return next("Cannot Connect");
+			}
+	
+			var query = conn.query("INSERT INTO funding SET ? ", data, function (err, rows) {
+	
+				if (err) {
+				
+					var register_error = {
+						msg: err.code
+					};
+		
+					res.status(422).json([register_error]);
+					return ;
+				}
+				
+				req.session.data.money -= data.fund_amount;
+				
+				var updateQuery = conn.query("UPDATE user set ? WHERE id = ? ",[req.session.data,req.session.data.id], function(err, rows){
+					if(err){
+						console.log(err);
+						return next("Mysql error, check your query");
+					}
+					req.flash('notif', 'You have successfully funded this project');
+					res.send({redirect: '/'});
+				});
+			});
+		});
+	}
+});
 
 module.exports = router;

@@ -22,6 +22,11 @@ function errorMessage(urlAddress, formID, errorDivID, action){
    });
 }
 
+function fundProject(formID, errorDivID, projectID, funderID){
+	urlAddress = '/project/fund/' + projectID + "-" + funderID;
+	errorMessage(urlAddress, formID, errorDivID, "post");
+}
+
 function findProjects(formID, errorDivID){
 	urlAddress = '/projects/find';
 	errorMessage(urlAddress, formID, errorDivID, "post");
@@ -57,8 +62,8 @@ function updateProject(formID, errorDivID, projectId){
 	errorMessage(urlAddress, formID, errorDivID, "put");
 }
 
-function likeProject(projectId){
-	urlAddress = '/like/' + projectId;
+function likeProject(projectID){
+	urlAddress = '/like/' + projectID;
 
 	$.ajax({     
 		url: urlAddress,

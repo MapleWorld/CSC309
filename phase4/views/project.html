@@ -8,84 +8,117 @@
 
 <!-- Page Content -->
 <div class="container">
-	<% for(var i = 0;i < data.length;i++) { %>
-		<div id="project_info_form">
-		
-			<form class="form-horizontal" id="project-info-form" method="post" autocomplete="on"> 
-				
-				<div class="project-info-form-err-area"></div>
-				
-				<div class="form-group">		
-					<h1 class="col-sm-8 control-label">Project Information Form</h1>
-				</div>
-		
-				<div class="form-group">
-			    	<label>Project Name: </label>
-			    	<p ><%=data[i].name%></p>
-			  	</div>
-			  	
-				<div class="form-group">
-			    	<label>Project Description</label>
-			    	<p><%=data[i].description%></p>
-			  	</div>
-			  	
-			  	<div class="form-group">
-			    	<label>Project Community</label>
-			    	<p><%=data[i].community%></p>
-			  	</div>
-		
-				<div class="form-group">
-			    	<label >Project Created Date: </label>
-			    	<p><%=data[i].created_date%></p>
-			  	</div>
-		
-				<div class="form-group">
-			    	<label >Project Initiator ID: </label>
-			    	<p><%=data[i].initiator_id%></p>
-			  	</div>
-			  	
-				<div class="form-group">
-					<table class="table table-hover">
-					    <thead>
-							<tr>
-								<th>Total Funding</th>
-								<th>Donation</th>
-								<th>Payment</th>
-								<th>Goal</th>
-								<th>Likes</th>
-							</tr>
-					    </thead>
-					    <tbody>
-							<tr>
-								<td><%=data[i].funding%></td>
-								<td><%=data[i].donation%></td>
-								<td><%=data[i].payment%></td>
-								<td><%=data[i].goal%></td>
-								<td><%=data[i].likes%></td>
-							</tr>
-					    </tbody>
-					</table>
-			  	</div>
+	<div id="project_info_form">
+	
+		<form class="form-horizontal" id="project-info-form" method="post" autocomplete="on"> 
+			
+			<div class="project-info-form-err-area"></div>
+			
+			<div class="form-group">		
+				<h1 class="col-sm-8 control-label">Project Information Form</h1>
+			</div>
+	
+			<div class="form-group">
+		    	<label>Project Name: </label>
+		    	<p ><%=data[0].name%></p>
+		  	</div>
+		  	
+			<div class="form-group">
+		    	<label>Project Description</label>
+		    	<p><%=data[0].description%></p>
+		  	</div>
+		  	
+		  	<div class="form-group">
+		    	<label>Project Community</label>
+		    	<p><%=data[0].community%></p>
+		  	</div>
+	
+			<div class="form-group">
+		    	<label >Project Created Date: </label>
+		    	<p><%=data[0].created_date%></p>
+		  	</div>
+	
+			<div class="form-group">
+		    	<label >Project Initiator ID: </label>
+		    	<p><%=data[0].initiator_id%></p>
+		  	</div>
 
-				<div class="form-group">
-			    	<label class="col-sm-5 control-label">Fund Project</label>
-			    	<div class="col-xs-3">	    	
-					    <div class="input-group">
-					    	<div class="input-group-addon">$</div>
-					    	<input id="project_goal" name="project_goal" type="number" min=0 class="form-control" placeholder="Amount">
-					    	<div class="input-group-addon">.00</div>
-					    </div>
+			<div class="form-group">
+				<table class="table table-hover">
+				    <thead>
+						<tr>
+							<th>Total Funding</th>
+							<th>Total Donation</th>
+							<th>Total Payment</th>
+							<th>Goal</th>
+							<th>Likes</th>
+						</tr>
+				    </thead>
+				    <tbody>
+						<tr>
+							<% var total_funding = 0; for(var i = 0;i < data.length;i++) { total_funding += data[i].fund_amount;} %>
+							<% var total_donation = 0; for(var i = 0;i < data.length;i++) {  %>
+							<% if (data[i].fund_option === "donation"){ total_donation += data[i].fund_amount;}} %>
+							<% var total_payment = 0; for(var i = 0;i < data.length;i++) { %>
+							<% if (data[i].fund_option === "payment"){ total_payment += data[i].fund_amount;}} %>
+							<td>$<%=total_funding%></td>
+							<td>$<%=total_donation%></td>
+							<td>$<%=total_payment%></td>
+							<td><%=data[0].goal%></td>
+							<td><%=data[0].likes%></td>
+						</tr>
+				    </tbody>
+				</table>
+		  	</div>
+		  	
+			<div class="form-group">
+				<table class="table table-hover">
+				    <thead>
+						<tr>
+							<th>Funded Amount</th>
+							<th>Funded By User ID</th>
+							<th>Funded Option</th>
+							<th>Funded Date</th>
+						</tr>
+				    </thead>
+				    <tbody>
+				    	<% for(var i = 0;i < data.length;i++) { %>
+							<tr>
+								<td>$<%=data[i].fund_amount%></td>
+								<td><a href="/user/<%=data[i].funder_id%>"><%=data[i].funder_id%></a></td>
+								<td><%=data[i].fund_option%></td>
+								<td><%=data[i].fund_date%></td>
+							</tr>
+						<% } %>
+				    </tbody>
+				</table>
+		  	</div>
+		  	
+			<div class="form-group">
+		    	<label class="col-sm-5 control-label">Fund Project</label>
+		    	<div class="col-xs-3">	    	
+				    <div class="input-group">
+				    	<div class="input-group-addon">$</div>
+				    	<input id="project_fund_amount" name="project_fund_amount" type="number" min=0 class="form-control" placeholder="Amount">
+				    	<div class="input-group-addon">.00</div>
 				    </div>
-			  	</div>
-	  	
-			  	<div class="form-group">
-			    	<div class="col-sm-offset-5">
-			      		<input type="button" class="btn btn-primary btn-lg" value="Fund Project" onClick="fundProject('#project-info-form', '.project-info-form-err-area', '<%=data[0].id%>')"/> 
-			    	</div>
-			  	</div>
-			</form>
-		</div>
-	<% } %>
+				    
+					<label class="radio-inline">
+					  <input type="radio" name="project_fund_option" id="project_dontation" value="donation" checked> Donation
+					</label>
+					<label class="radio-inline">
+					  <input type="radio" name="project_fund_option" id="project_payment" value="payment"> Payment
+					</label>
+				</div>
+		  	</div>
+  	
+		  	<div class="form-group">
+		    	<div class="col-sm-offset-5">
+		      		<input type="button" class="btn btn-primary btn-lg" value="Fund Project" onClick="fundProject('#project-info-form', '.project-info-form-err-area', '<%=data[0].p_id%>', '<%=user_id%>')"/> 
+		    	</div>																				
+		  	</div>
+		</form>
+	</div>
 </div>
 <!-- Bootstrapped Footer -->
 <!-- Footer -->

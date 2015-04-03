@@ -4,6 +4,7 @@ var router = express.Router();
 router.get('/funder', function(req, res) {
 	if(req.session.authenticated) {
 		res.render('funder', {notif: req.flash('notif'),
+						user_id: req.session.data.id,
 						auth: req.session.authenticated});	
 		return ;	
 	}
@@ -29,6 +30,7 @@ router.put('/funder/update', function (req, res) {
 
 	var data = {
 		organization	: req.body.funder_organization,
+		funder_ready	: 1,
 		interest 		: req.body.funder_interest,
 		money		 	: req.body.funder_money
 	};
@@ -42,9 +44,25 @@ router.put('/funder/update', function (req, res) {
 				console.log(err);
 				return next("Mysql error, check your query");
 			}
-
-			req.flash('notif', 'You have successfully completed the funder form');
-			res.send({redirect: '/profile'});
+			
+			// Update the user session
+			var sql = 'SELECT * FROM user WHERE id =' + conn.escape(req.session.data.id);
+						
+			conn.query(sql, function(err, rows) {
+				if (err) {
+					console.log(err);
+				}
+				
+				if (rows.length == 0){
+					console.log("Can't update user session");
+					return ;
+				} 
+				
+				req.flash('notif', 'You have successfully completed the funder form');
+				req.session.data = rows[0];
+	            req.session.authenticated = true;
+				res.send({redirect: '/profile'});
+			});
         });
 	});
 });

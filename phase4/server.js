@@ -47,6 +47,7 @@ app.use(connection(mysql,{
 // Routes	
 var router 			= express.Router();
 var home 			= require('./routes/home');
+var user 			= require('./routes/user');
 var about 			= require('./routes/about');
 var login 			= require('./routes/login');
 var logout			= require('./routes/logout');
@@ -60,6 +61,7 @@ var initiator		= require('./routes/initiator');
 var create_project	= require('./routes/create_project');
 
 app.use('/', home);
+app.use('/', user);
 app.use('/', about);
 app.use('/', login);
 app.use('/', logout);
