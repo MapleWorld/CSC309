@@ -29,10 +29,14 @@
 		    	<p ><%=data[0].username%></p>
 		  	</div>
 		  	
-			<div class="form-group">
-		    	<label>User Password</label>
-		    	<p><%=data[0].password%></p>
-		  	</div>
+		  	<% if (auth) { %>
+		  		<% if (admin) { %>
+					<div class="form-group">
+				    	<label>User Password</label>
+				    	<p><%=data[0].password%></p>
+				  	</div>
+				<% } %>
+			<% } %>
 		  	
 		  	<div class="form-group">
 		    	<label>User Email</label>
@@ -45,7 +49,7 @@
 		  	</div>
 		</form>
 		
-		<form class="col-sm-4 control-label" id="initiator-user-info-form" method="post" autocomplete="on"> 
+		<form class="col-sm-4 control-label" id="initiator-user-info-form" method="put" autocomplete="on"> 
 
 			<div class="form-group">		
 				<h3>User Initiator Information </h3>
@@ -80,9 +84,11 @@
 		    	<label>Initiator Reputation</label>
 		    	<p><%=data[0].initiator_reputation%></p>
 		  	</div>	
+		  	
+		  	<td><button class="btn btn-primary" onClick="addInitiatorRep('<%=data[0].id%>')">Add Initiator Reputation</button></td>
 		</form>
 		  		
-		<form class="col-sm-4 control-label" id="funder-user-info-form" method="post" autocomplete="on"> 
+		<form class="col-sm-4 control-label" id="funder-user-info-form" method="put" autocomplete="on"> 
 			
 			<div class="form-group">		
 				<h3>User Funder Information </h3>
@@ -107,8 +113,34 @@
 		    	<label>Funder Reputation</label>
 		    	<p><%=data[0].funder_reputation%></p>
 		  	</div>
+		  	
+		  	<td><button class="btn btn-primary" onClick="addFunderRep('<%=data[0].id%>')">Add Funder Reputation</button></td>
 		</form>
+		
 	</div>	
+	
+	<div class="form-group">
+		<table class="table table-hover">
+		    <thead>
+				<tr>
+					<th>Funded Project ID</th>
+					<th>Funded Funded Amount</th>
+					<th>Funded Option</th>
+					<th>Funded Date</th>
+				</tr>
+		    </thead>
+		    <tbody>
+		    	<% for(var i = 0;i < data.length;i++) { %>
+					<tr>
+						<td><a href="/project/<%=data[i].project_id%>"><%=data[i].project_id%></a></td>
+						<td>$<%=data[i].fund_amount%></td>
+						<td><%=data[i].fund_option%></td>
+						<td><%=data[i].fund_date%></td>
+					</tr>
+				<% } %>
+		    </tbody>
+		</table>
+  	</div>
 </div>
 
 <!-- Bootstrapped Footer -->

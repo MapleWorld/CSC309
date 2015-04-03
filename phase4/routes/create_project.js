@@ -5,11 +5,17 @@ var tools = require('../public/js/tools');
 
 router.get('/create_project', function(req, res) {
 	
-	
 	if(req.session.authenticated) {
-		res.render('create_project', {notif: req.flash('notif'),
-						auth: req.session.authenticated});	
-		return ;		
+		if (req.session.data.initiator_ready){
+			res.render('create_project', {notif: req.flash('notif'),
+							auth: req.session.authenticated});	
+			return ;		
+		}else{
+			req.flash('notif', 'You are not a initiator.');
+			res.render('home', {notif: req.flash('notif'),
+				auth: req.session.authenticated});	
+			return ;
+		}
 	}
 	req.flash('notif', 'You are not login.');
 	res.render('login', {notif: req.flash('notif'),

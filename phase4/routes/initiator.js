@@ -5,7 +5,8 @@ router.get('/initiator', function(req, res) {
 	if(req.session.authenticated) {
 		res.render('initiator', {notif: req.flash('notif'),
 						user_id: req.session.data.id,
-						auth: req.session.authenticated});	
+						auth: req.session.authenticated,
+						admin: req.session.data.admin});	
 		return ;		
 	}
 	req.flash('notif', 'You are not login.');
@@ -18,7 +19,7 @@ router.put('/initiator/update', function (req, res) {
 
 	// Validation
 	req.assert('initiator_firstname', 'First Name is required').notEmpty();
-	req.assert('initiator_last','Last Name is required').notEmpty();
+	req.assert('initiator_lastname','Last Name is required').notEmpty();
 	req.assert('initiator_address', 'Mailing Address is required').notEmpty();
 	req.assert('initiator_phone','Phone Number is required').notEmpty();
 	req.assert('initiator_gender','Gender is required').notEmpty();

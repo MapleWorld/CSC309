@@ -75,6 +75,31 @@ function likeProject(projectID){
    });
 }
 
+function addFunderRep(userID){
+	urlAddress = '/user/addFunderRep/' + userID;
+
+	$.ajax({     
+		url: urlAddress,
+		type:"put",
+		success:function(res){
+			window.location = res.redirect;
+			return false;
+		}
+   });
+}
+
+function addInitiatorRep(userID){
+	urlAddress = '/user/addInitiatorRep/' + userID;
+
+	$.ajax({     
+		url: urlAddress,
+		type:"put",
+		success:function(res){
+			window.location = res.redirect;
+			return false;
+		}
+   });
+}
 
 function deleteProject(projectID){
 	$.ajax({     
